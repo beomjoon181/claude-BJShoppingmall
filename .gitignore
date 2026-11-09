@@ -1,0 +1,30 @@
+# Node.js 패키지 폴더 (용량이 매우 크므로 절대 올리면 안 됨)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 환경 변수 파일 (비밀번호나 API 키가 들어있으므로 절대 올리면 안 됨)
+.env
+.env.*
+!.env.example
+
+# 로컬/비밀 설정 파일 (개인 설정, 인증서, 키 등)
+*.local
+*.local.json
+config.local.*
+secrets.*
+*.pem
+*.key
+.npmrc
+
+# Claude Code 개인 설정 (공유용 .claude/commands 는 유지)
+.claude/settings.local.json
+
+# OS에서 자동 생성되는 파일들
+.DS_Store
+Thumbs.db
+
+# IDE (VS Code 등) 설정 파일
+.vscode/
+.idea/

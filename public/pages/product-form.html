@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>제품 관리 - BJShoppingmall</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <script src="/static/js/common.js" defer></script>
+    <script src="/static/js/product-form.js" defer></script>
+  </head>
+  <body>
+    <header id="site-header"></header>
+    <main>
+      <h1 class="page-title" id="form-title">제품 등록</h1>
+      <div id="form-root" hidden>
+        <section class="detail">
+          <div>
+            <h2 class="section-title section-title-first">제품 사진</h2>
+            <p class="hint">1~10장. 첫 번째 사진이 메인 화면 카드에 보입니다.</p>
+            <div class="image-tiles" id="product-images"></div>
+          </div>
+          <div class="detail-info">
+            <h2 class="section-title section-title-first">제품 정보</h2>
+
+            <div class="edit-row" data-field="name">
+              <div class="edit-row-head">
+                <span class="edit-row-label">제품명</span>
+                <span class="edit-row-value" data-display></span>
+                <button class="btn btn-small" type="button" data-toggle>변경</button>
+              </div>
+              <div class="edit-row-form" data-form hidden>
+                <input class="input" type="text" maxlength="100" placeholder="제품명" />
+                <button class="btn btn-small btn-primary" type="button" data-apply>확인</button>
+              </div>
+            </div>
+
+            <div class="edit-row" data-field="price">
+              <div class="edit-row-head">
+                <span class="edit-row-label">가격</span>
+                <span class="edit-row-value" data-display></span>
+                <button class="btn btn-small" type="button" data-toggle>변경</button>
+              </div>
+              <div class="edit-row-form" data-form hidden>
+                <input class="input" type="number" min="0" step="1" placeholder="가격(원)" />
+                <button class="btn btn-small btn-primary" type="button" data-apply>확인</button>
+              </div>
+            </div>
+
+            <div class="edit-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="is-discount" />
+                할인 적용
+              </label>
+            </div>
+
+            <div class="edit-row" data-field="discountRate">
+              <div class="edit-row-head">
+                <span class="edit-row-label">할인율</span>
+                <span class="edit-row-value" data-display></span>
+                <button class="btn btn-small" type="button" data-toggle>변경</button>
+              </div>
+              <div class="edit-row-form" data-form hidden>
+                <input class="input" type="number" min="1" max="100" step="1" placeholder="할인율(1~100%)" />
+                <button class="btn btn-small btn-primary" type="button" data-apply>확인</button>
+              </div>
+            </div>
+
+            <div class="edit-row">
+              <div class="edit-row-head">
+                <span class="edit-row-label">판매 가격</span>
+                <span id="price-preview"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <h2 class="section-title">제품 설명 사진</h2>
+        <div class="image-tiles" id="description-images"></div>
+
+        <div class="save-bar">
+          <button class="btn btn-large" type="button" id="cancel-btn">취소</button>
+          <button class="btn btn-primary btn-large" type="button" id="save-btn">저장</button>
+        </div>
+      </div>
+      <p class="empty" id="form-message">불러오는 중...</p>
+    </main>
+  </body>
+</html>
