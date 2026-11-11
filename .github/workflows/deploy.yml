@@ -20,7 +20,7 @@ jobs:
           script: |
             cd /home/ubuntu/claude_deploy
             git pull origin main
-            docker build -t cluade-app .
-            docker stop cluade-container || true
-            docker rm cluade-container || true
-            docker run -d --restart always -p 3000:3000 --name cluade-container cluade-app
+            docker build -t claude-app .
+            docker stop claude-container || true
+            docker rm claude-container || true
+            docker run -d --restart always -p 3000:3000 --name claude-container claude-app
