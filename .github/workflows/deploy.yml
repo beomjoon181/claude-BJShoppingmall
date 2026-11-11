@@ -22,8 +22,10 @@ jobs:
             cd /home/ubuntu/BJShoppingmall
             git pull https://github.com/beomjoon181/claude-BJShoppingmall.git main
             docker build -t claude-app .
-            docker stop claude-container || true
-            docker rm claude-container || true
             ENV_OPT=""
             if [ -f .env ]; then ENV_OPT="--env-file .env"; else echo "⚠️ .env 파일이 없습니다"; fi
+            # DB 마이그레이션 (실패하면 배포 중단, 기존 컨테이너는 유지)
+            docker run --rm --network host $ENV_OPT claude-app npx prisma migrate deploy
+            docker stop claude-container || true
+            docker rm claude-container || true
             docker run -d --restart always --network host $ENV_OPT --name claude-container claude-app
