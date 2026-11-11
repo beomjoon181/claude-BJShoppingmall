@@ -18,9 +18,12 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /home/ubuntu/BJShoppingmall
             git pull https://github.com/beomjoon181/claude-BJShoppingmall.git main
             docker build -t claude-app .
             docker stop claude-container || true
             docker rm claude-container || true
-            docker run -d --restart always -p 3000:3000 --name claude-container claude-app
+            ENV_OPT=""
+            if [ -f .env ]; then ENV_OPT="--env-file .env"; else echo "⚠️ .env 파일이 없습니다"; fi
+            docker run -d --restart always -p 3000:3000 $ENV_OPT --name claude-container claude-app
