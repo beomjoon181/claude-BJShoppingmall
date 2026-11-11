@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/ubuntu/BJShoppingmall
-            git pull origin main
+            git pull https://github.com/beomjoon181/claude-BJShoppingmall.git main
             docker build -t claude-app .
             docker stop claude-container || true
             docker rm claude-container || true
