@@ -26,4 +26,4 @@ jobs:
             docker rm claude-container || true
             ENV_OPT=""
             if [ -f .env ]; then ENV_OPT="--env-file .env"; else echo "⚠️ .env 파일이 없습니다"; fi
-            docker run -d --restart always -p 3000:3000 $ENV_OPT --name claude-container claude-app
+            docker run -d --restart always --network host $ENV_OPT --name claude-container claude-app
