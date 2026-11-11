@@ -23,7 +23,16 @@ jobs:
             git pull https://github.com/beomjoon181/claude-BJShoppingmall.git main
             docker build -t claude-app .
             ENV_OPT=""
-            if [ -f .env ]; then ENV_OPT="--env-file .env"; else echo "⚠️ .env 파일이 없습니다"; fi
+            if [ -f .env ]; then
+              # docker --env-file은 따옴표를 값에 포함하므로, 따옴표와 CR을 제거한 사본을 사용
+              sed -e 's/\r$//' \
+                  -e 's/^\([A-Za-z_][A-Za-z0-9_]*\)="\(.*\)"$/\1=\2/' \
+                  -e "s/^\([A-Za-z_][A-Za-z0-9_]*\)='\(.*\)'$/\1=\2/" \
+                  .env > .env.docker
+              ENV_OPT="--env-file .env.docker"
+            else
+              echo "⚠️ .env 파일이 없습니다"
+            fi
             # DB 마이그레이션 (실패하면 배포 중단, 기존 컨테이너는 유지)
             docker run --rm --network host $ENV_OPT claude-app npx prisma migrate deploy
             docker stop claude-container || true
