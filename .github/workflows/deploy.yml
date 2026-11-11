@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/ubuntu/claude_deploy
+            cd /home/ubuntu/BJShoppingmall
             git pull origin main
             docker build -t claude-app .
             docker stop claude-container || true
